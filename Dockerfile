@@ -5,8 +5,6 @@ ARG OWNER=jupyter
 ARG BASE_CONTAINER=$REGISTRY/$OWNER/minimal-notebook
 FROM $BASE_CONTAINER
 
-LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
-
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -44,7 +42,7 @@ USER ${NB_UID}
 # Setup IJulia kernel & other packages
 RUN /opt/setup-scripts/setup-julia-packages.bash
 
-RUN  julia -e ' import Pkg; Pkg.update(); Pkg.add(["Git", "Convex", "SCS", "Compose", "JSON3", "TikzPictures", "Colors", "Documenter", "Literate", "PrettyTables", "LaTeXStrings", "TikzCDs", "GATlab", "Catlab", "DataStructures" ]); Pkg.precompile();'
+RUN  julia -e 'import Pkg; Pkg.update(); Pkg.add(["Git", "Convex", "SCS", "Compose", "JSON3", "TikzPictures", "Colors", "Documenter", "Literate", "PrettyTables", "LaTeXStrings", "TikzCDs", "GATlab", "Catlab", "DataStructures", "AlgebraicRewriting", "DataMigrations" ]); Pkg.precompile();'
 #"LabelledArrays", "OrdinaryDiffEq", "Plots", 
 
 RUN pip install -U jupyterlab-git
