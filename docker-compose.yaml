@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .:/home/jovyan
+    ports:
+      - 8888:8888
